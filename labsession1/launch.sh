@@ -4,9 +4,9 @@
 echo "Compilation : $1.c"
 
 echo "--- sequencial version"
-gcc -o $1 ./$1.c -lm
+gcc -o $1.out ./$1.c -lm
 echo "--- parallel version"
-gcc -o $1-para ./$1.c -fopenmp -lm
+gcc -o $1-para.out ./$1.c -fopenmp -lm
 echo                                          # empty line for output lisibility
 
 
@@ -27,7 +27,7 @@ do
     echo "$t threads for a sample of size $i"
     line="$t,"
     line="$line$i,"
-    line="$line$({ time ./$1-para $i $t 2>&3; } 3>&2 2>&1)"
+    line="$line$({ time ./$1-para.out $i $t 2>&3; } 3>&2 2>&1)"
     echo $line >> $1.csv
     # { time ./$1 $i 2>&3; } 3>&2 2>> $1.csv
   done
